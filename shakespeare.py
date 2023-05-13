@@ -195,7 +195,7 @@ class BigramLanguageModel(nn.Module):
         self.positionEmbeddingTable = nn.Embedding(blockSize, nEmbd)
         self.blocks = nn.Sequential(
             *[Block(nEmbd, nHead=nHead) for _ in range(0, nLayer)])
-        self.lnF = nn.Linear(nEmbd, nEmbd)  # final layer norm
+        self.lnF = nn.LayerNorm(nEmbd, nEmbd)  # final layer norm
         self.lmHead = nn.Linear(nEmbd, vocabSize)
 
     def forward(self, idx, targets=None):
